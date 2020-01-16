@@ -41,8 +41,9 @@ class LRU_Cache:
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item. 
         if self.cache_size == 0:
             self.cache[key] = value
-            self.cache_tracker_head = Node(value)
-            self.cache_tracker_tail = Node(value)
+            new_node = Node(value)
+            self.cache_tracker_head = new_node
+            self.cache_tracker_tail = new_node
             self.cache_size += 1
         elif self.cache_size == self.cache_capacity:
             print(f"Cache at capacity while setting {key}")
@@ -75,6 +76,8 @@ class LRU_Cache:
         old_node = self.cache_tracker_head
         new_head.next = old_node
         old_node.previous = new_head
+        if self.cache_tracker_head == self.cache_tracker_tail:
+            self.cache_tracker_tail.previous = new_head
         print(f"Old node previous after setting to new head: {old_node.previous}")
         self.cache_tracker_head = new_head
     
