@@ -28,7 +28,20 @@ def is_user_in_group(user, group):
       user(str): user name/id
       group(class:Group): group to check user membership against
     """
-    return None
+    
+    def recursive_check_users(user, group):
+    
+        for u in group.users:
+            if user == u:
+                return True
+        
+        if group.groups != []: # Check for sub groups
+            for g in group.groups:
+                return recursive_check_users(user, g)
+        else:
+            return False
+
+    return recursive_check_users(user, group)
 
 
 parent = Group("parent")
@@ -40,3 +53,5 @@ sub_child.add_user(sub_child_user)
 
 child.add_group(sub_child)
 parent.add_group(child)
+
+print(is_user_in_group("sub_child_user", parent))
