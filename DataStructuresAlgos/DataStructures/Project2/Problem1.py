@@ -32,6 +32,7 @@ class LRU_Cache:
     def __init__(self, capacity):
         # Initialize class variables
         self.cache = dict()
+        self.cache_mapper = dict()
         self.cache_capacity = capacity
         self.cache_size = 0 
         self.cache_tracker_head = None # LinkedList head
@@ -40,57 +41,87 @@ class LRU_Cache:
     def set(self, key, value):
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item. 
         if self.cache_size == 0:
-            self.cache[key] = value
+            print(f"Cache empty setting inital node: {key}")
             new_node = Node(value)
+            self.cache[key] = new_node
             self.cache_tracker_head = new_node
             self.cache_tracker_tail = new_node
             self.cache_size += 1
         elif self.cache_size == self.cache_capacity:
             print(f"Cache at capacity while setting {key}")
+            new_node = Node(value)
             lru_key = self._remove_tail()
-            self._add_head(key)
-            self.cache[key] = value
+            self._add_head(new_node)
+            self.cache[key] = new_node
             del self.cache[lru_key]
         else:
-            self.cache[key] = value
-            self._add_head(key)
+            print(f"Adding to cache: {key}")
+            new_node = Node(value)
+            self.cache[key] = new_node
+            print(f"New cache: {self.cache}")
+            self._add_head(new_node)
             self.cache_size += 1
 
     def get(self, key):
-        # Retrieve item from provided key. Return -1 if nonexistent. 
+        # Retrieve item from provided key. Return -1 if nonexistent.
+        print(f"Getting: {key}")
+        print(f"Current cache: {self.cache}")
+        print(f"Current tail: {self.cache_tracker_tail.value}")
+        print(f"Current tail previous: {self.cache_tracker_tail.previous.value}")
+        if self.cache_tracker_tail.next is None:
+            print(f"Current tail next is None")
+        else:
+            print(f"Current tail next is: {self.cache_tracker_tail.next.value}")
         if self.cache.get(key) is None:
             return -1
         else:
+            node = self.cache[key]
+            print(f"Get node: {node.value}")
             if key != self.cache_tracker_head.value:
-                self._add_head(key)
-                return self.cache[key]
-            return self.cache[key]
+                print(f"Node: {node}")
+                print(f"Tail: {self.cache_tracker_tail}")
+                self._remove_node(node)
+                self._add_head(node)
+                return node.value
+            return node.value
 
-
-
-    # TODO Add functionality to update previous of tail or the equivalent 
-    def _add_head(self, value):
-        print(f"Adding new head: {value}")
-        new_head = Node(value)
+    def _add_head(self, node):
+        print(f"Adding new head: {node.value}")
+        # new_head = Node(value)
         print(f"Old head: {self.cache_tracker_head.value}")
         old_node = self.cache_tracker_head
-        new_head.next = old_node
-        old_node.previous = new_head
+        node.next = old_node
+        old_node.previous = node
         if self.cache_tracker_head == self.cache_tracker_tail:
-            self.cache_tracker_tail.previous = new_head
-        print(f"Old node previous after setting to new head: {old_node.previous}")
-        self.cache_tracker_head = new_head
+            self.cache_tracker_tail.previous = node
+        print(f"Old node previous after setting to new head: {old_node.previous.value}")
+        self.cache_tracker_head = node
     
     def _remove_tail(self):
-        print(f"Removing {self.cache_tracker_tail.value} from cache")
+        print(f"Removing {self.cache_tracker_tail.value} from tail")
         lru_key = self.cache_tracker_tail.value
-        print(f"New tail: {self.cache_tracker_tail.previous}")
+        print(f"New tail: {self.cache_tracker_tail.previous.value}")
+        print(f"New tail previous: {self.cache_tracker_tail.previous.previous.value}")
+        self.cache_tracker_tail.previous.next = None
         self.cache_tracker_tail = self.cache_tracker_tail.previous
 
         return lru_key
 
-    # def __repr__(self):
+    def _remove_node(self, node):
 
+        print(f"Removing node: {node.value}")
+        print(f"Previous: {node.previous.value}")
+        print(f"Next: {node.next}")
+        node.previous.next = node.next
+        if node.next is not None:
+            print(f"Next node: {node.next.value}")
+            node.next.previous = node.previous
+        else:
+            return self._remove_tail()
+            # del self.cache[lru_key]
+
+    def __repr__(self):
+        print(f"Cache: {self.cache}")
 
 
 
@@ -119,5 +150,7 @@ print(our_cache.cache)
 
 our_cache.set(7, 7)
 our_cache.set(8, 8)
+our_cache.get(2)
 
+our_cache.set(10, 10)
 print(our_cache.cache)
