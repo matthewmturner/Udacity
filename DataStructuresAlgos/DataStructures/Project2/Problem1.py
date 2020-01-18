@@ -41,87 +41,74 @@ class LRU_Cache:
     def set(self, key, value):
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item. 
         if self.cache_size == 0:
-            print(f"Cache empty setting inital node: {key}")
             new_node = Node(value)
             self.cache[key] = new_node
             self.cache_tracker_head = new_node
             self.cache_tracker_tail = new_node
             self.cache_size += 1
+        # If cache is at capcity remove LRU and add new value
         elif self.cache_size == self.cache_capacity:
-            print(f"Cache at capacity while setting {key}")
             new_node = Node(value)
             lru_key = self._remove_tail()
             self._add_head(new_node)
             self.cache[key] = new_node
             del self.cache[lru_key]
+        # If cache is not at capacity add new value
         else:
-            print(f"Adding to cache: {key}")
             new_node = Node(value)
             self.cache[key] = new_node
-            print(f"New cache: {self.cache}")
             self._add_head(new_node)
             self.cache_size += 1
 
     def get(self, key):
         # Retrieve item from provided key. Return -1 if nonexistent.
-        print(f"Getting: {key}")
-        print(f"Current cache: {self.cache}")
-        print(f"Current tail: {self.cache_tracker_tail.value}")
-        print(f"Current tail previous: {self.cache_tracker_tail.previous.value}")
-        if self.cache_tracker_tail.next is None:
-            print(f"Current tail next is None")
-        else:
-            print(f"Current tail next is: {self.cache_tracker_tail.next.value}")
+
         if self.cache.get(key) is None:
             return -1
         else:
             node = self.cache[key]
-            print(f"Get node: {node.value}")
+            # If key exists and is not head then remove current placement, add to head
+            # and return value
             if key != self.cache_tracker_head.value:
-                print(f"Node: {node}")
-                print(f"Tail: {self.cache_tracker_tail}")
                 self._remove_node(node)
                 self._add_head(node)
                 return node.value
+            # If key exists and is head then return value
             return node.value
 
     def _add_head(self, node):
-        print(f"Adding new head: {node.value}")
-        # new_head = Node(value)
-        print(f"Old head: {self.cache_tracker_head.value}")
+        # Add new head by making new node next to old head and 
+        # old head previous to new node
         old_node = self.cache_tracker_head
         node.next = old_node
         old_node.previous = node
-        if self.cache_tracker_head == self.cache_tracker_tail:
-            self.cache_tracker_tail.previous = node
-        print(f"Old node previous after setting to new head: {old_node.previous.value}")
         self.cache_tracker_head = node
     
     def _remove_tail(self):
-        print(f"Removing {self.cache_tracker_tail.value} from tail")
+        # Remove tail and return key to delete from cache
         lru_key = self.cache_tracker_tail.value
-        print(f"New tail: {self.cache_tracker_tail.previous.value}")
-        print(f"New tail previous: {self.cache_tracker_tail.previous.previous.value}")
         self.cache_tracker_tail.previous.next = None
         self.cache_tracker_tail = self.cache_tracker_tail.previous
 
         return lru_key
 
     def _remove_node(self, node):
-
-        print(f"Removing node: {node.value}")
-        print(f"Previous: {node.previous.value}")
-        print(f"Next: {node.next}")
+        # Remove node after it has been used
         node.previous.next = node.next
         if node.next is not None:
-            print(f"Next node: {node.next.value}")
+            # If not tail set previous of next to previous
             node.next.previous = node.previous
         else:
             return self._remove_tail()
-            # del self.cache[lru_key]
 
     def __repr__(self):
-        print(f"Cache: {self.cache}")
+        s = "Cache:\n"
+        for k,v in self.cache.items():
+            s += f"Key({k}): {v.value}\n"
+        return s
+
+    def __len__(self):
+        return self.cache_size
 
 
 
@@ -146,11 +133,12 @@ our_cache.set(5, 5)
 our_cache.set(6, 6)
 
 print(our_cache.get(3))
-print(our_cache.cache)
+print(our_cache)
 
 our_cache.set(7, 7)
 our_cache.set(8, 8)
 our_cache.get(2)
 
 our_cache.set(10, 10)
-print(our_cache.cache)
+print(our_cache)
+print(len(our_cache))
