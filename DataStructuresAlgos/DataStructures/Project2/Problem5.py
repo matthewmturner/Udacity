@@ -83,12 +83,6 @@ class Blockchain:
         return s
 
 
-    def __iter__(self):
-
-        
-
-
-
 
 	
 

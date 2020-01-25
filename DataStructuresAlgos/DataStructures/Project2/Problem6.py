@@ -42,12 +42,39 @@ class LinkedList:
         return size
 
 def union(llist_1, llist_2):
-    # Your Solution Here
-    pass
+    
+    result = set()
+    
+    node_1 = llist_1.head
+    while node_1.next:
+        result.add(node_1.value)
+        node_1 = node_1.next
+
+    node_2 = llist_2.head
+    while node_2.next:
+        result.add(node_2.value)
+        node_2 = node_2.next
+
+    return result
+    
 
 def intersection(llist_1, llist_2):
-    # Your Solution Here
-    pass
+    
+    keys = set()
+    result = set()
+
+    node_1 = llist_1.head
+    while node_1.next:
+        keys.add(node_1.value)
+        node_1 = node_1.next
+
+    node_2 = llist_2.head
+    while node_2.next:
+        if node_2.value in keys:
+            result.add(node_2.value)
+        node_2 = node_2.next
+
+    return result
 
 
 # Test case 1
