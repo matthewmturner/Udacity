@@ -1,7 +1,11 @@
 import sys
 
 def huffman_encoding(data):
-    pass
+    
+    char_frequencies = {}
+
+    for char in data:
+        char_frequencies[char] = char_frequencies.get(char, 0) + 1
 
 def huffman_decoding(data,tree):
     pass
