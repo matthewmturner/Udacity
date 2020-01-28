@@ -27,12 +27,12 @@ def recursive_find_files(suffix, path):
         if os.path.isfile(full_path) and item.endswith(".c"):
             files.append(full_path)
         elif os.path.isdir(full_path):
-            results = find_files(suffix, full_path)
+            results = recursive_find_files(suffix, full_path)
             files += results
 
     return files
 
 
 if __name__ == '__main__':
-    res = find_files(".c", r"C:\Users\matth\OneDrive\Learning\Udacity\DataStructuresAlgos\Project2\testdir")
+    res = find_files(".c", r"C:\Users\matth\OneDrive\Learning\Udacity\DataStructuresAlgos\DataStructures\Project2\testdir")
     print(res)
