@@ -1,4 +1,25 @@
 import sys
+from collections import deque
+
+class CharNode:
+
+    def __init__(self, char, freq):
+        self.char = char
+        self.freq = freq
+        self.left = None
+        self.right = None
+
+
+class Node:
+
+    def __init__(self):
+        self.freq = None
+        self.left = None
+        self.right = None
+
+    def set_value():
+        self.freq = self.left.freq + self.right.freq
+
 
 def huffman_encoding(data):
     
@@ -6,6 +27,31 @@ def huffman_encoding(data):
 
     for char in data:
         char_frequencies[char] = char_frequencies.get(char, 0) + 1
+
+    pairs = []
+    for char, ct in char_frequencies.items():
+        pair = (char, ct)
+        pairs.append(pair)
+
+    sorted_pairs = sorted(pairs, key=lambda x: x[1])
+    queue = deque()
+
+    for char_pair in sorted_pairs:
+        node = Node(char_pair[0], char_pair[1])
+        queue.appendleft(node)
+
+    while len(queue) > 1:
+        node_smaller = queue.pop()
+        node_small = queue.pop()
+        node = Node()
+        node.right = node_smaller
+        node.left = node_small
+        node.set_value()
+
+    pass
+
+
+
 
 def huffman_decoding(data,tree):
     pass
