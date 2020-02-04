@@ -1,23 +1,21 @@
 import sys
-from collections import deque
+from collections import deque, namedtuple
 
 class CharNode:
 
     def __init__(self, char, freq):
         self.char = char
         self.freq = freq
-        self.left = None
-        self.right = None
 
 
 class Node:
 
-    def __init__(self):
+    def __init__(self, left, right):
         self.freq = None
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
-    def set_value():
+    def set_freq(self):
         self.freq = self.left.freq + self.right.freq
 
 
@@ -30,27 +28,40 @@ def huffman_encoding(data):
 
     pairs = []
     for char, ct in char_frequencies.items():
-        pair = (char, ct)
+        CharCount = namedtuple('Pair', ['char', 'count'])
+        pair = CharCount(char=char, count=ct)
         pairs.append(pair)
 
-    sorted_pairs = sorted(pairs, key=lambda x: x[1])
+    sorted_pairs = sorted(pairs, key=lambda x: x.count)
     queue = deque()
 
     for char_pair in sorted_pairs:
-        node = Node(char_pair[0], char_pair[1])
+        node = CharNode(char_pair.char, char_pair.count)
         queue.appendleft(node)
 
     while len(queue) > 1:
         node_smaller = queue.pop()
         node_small = queue.pop()
-        node = Node()
-        node.right = node_smaller
-        node.left = node_small
-        node.set_value()
+        node = Node(node_small, node_smaller)
+        node.set_freq()
+        queue.appendleft(node)
 
-    pass
+    root_node = queue.pop()
 
+    encoded_string = ""
 
+    def tree_traverse(char):
+        node = root_node
+        char_code = ''
+        if node.left == char:
+            char_code += 0
+            return char_code
+        elif node.right == char:
+            char_code += 1
+            return char_code
+        else:
+            node = 
+            
 
 
 def huffman_decoding(data,tree):
