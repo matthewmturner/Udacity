@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}{% endblock %}Project Organizer</title>
+    {% endblock %}
+  </head>
+  <body>
+        <div class="col-md-2"></div>
+        <div class="col-md-10"></div>
+            <h1>Project Organizer</h1>
+        <div id="content">{% block content %}{% endblock %}</div>
+        <div id="footer">
+        {% block footer %}
+        Matthew Turner Fullstack Nanodegree Item Catalog project.
+        {% endblock %}
+    </div>
+  </body>
+</html>

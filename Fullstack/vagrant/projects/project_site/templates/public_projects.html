@@ -1,0 +1,20 @@
+{% extends 'layout1.html' %}
+{% block content %}
+    <div class="row top-menu">
+        <div class="col-md-8"></div>
+        <div class="col-md-2 text-right">
+            <a href="{{url_for('showLogin')}}">Click Here to Log in </a>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="row divider blue">
+        <div class="col-md-12"></div>
+    </div>
+    <div class="row banner main">
+        <div class="col-md-1"></div>
+        <div class="col-md-11 padding-none">
+            <h2>Project List</h2>
+        </div>
+    </div>
+    
+{% endblock %}
