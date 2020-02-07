@@ -87,23 +87,24 @@ def huffman_encoding(data):
 
         codes = {}
 
-        def traverse(node, code):
+        def traverse(node, code, val):
+            code += str(val)
             if node:
                 if node.char:
                     codes[node.char] = code
-                code += '0'
-                traverse(node.get_left(), code)
-                code += '1'
-                traverse(node.get_right(), code)
+                traverse(node.get_left(), code, 0)
+                traverse(node.get_right(), code, 1)
         
-        code = "0"        
-        traverse(root.get_left(), code)
-        code = "1"        
-        traverse(root.get_right(), code)
+        code = ""        
+        traverse(root.get_left(), code, 0)        
+        traverse(root.get_right(), code, 1)
 
         return codes
 
     codes = pre_order(root_node)
+
+    for c, cd in codes.items():
+        print(f"Char({c}): {cd}")
 
     encoded_data = ""
     for char in data:
@@ -133,12 +134,11 @@ if __name__ == "__main__":
     codes = {}
 
     a_great_sentence = "The bird is the word"
-    a_great_sentence2 = "THE BIRD IS THE WORD"
 
-    print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence2)))
-    print ("The content of the data is: {}\n".format(a_great_sentence2))
+    print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
+    print ("The content of the data is: {}\n".format(a_great_sentence))
 
-    encoded_data, tree, codes = huffman_encoding(a_great_sentence2)
+    encoded_data, tree, codes = huffman_encoding(a_great_sentence)
 
     print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
     print ("The content of the encoded data is: {}\n".format(encoded_data))
