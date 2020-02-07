@@ -2,22 +2,7 @@ import sys
 from collections import deque, namedtuple
 from queue import PriorityQueue
 
-class CharNode:
-
-    def __init__(self, char, freq):
-        self.char = char
-        self.freq = freq
-        self.visited = False
-
-
 class Node:
-
-    # def __init__(self, left, right):
-    #     self.char = None
-    #     self.freq = None
-    #     self.left = None
-    #     self.right = None
-    #     self.visited = False
         
     def __init__(self):
         self.char = None
