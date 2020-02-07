@@ -14,7 +14,7 @@ The time complexity for this is O(n) where n represents the number of files in a
 
 
 ## Problem 3: Huffman Encoding
-
+The time complexity of this is O(n log(n)).  This comes from starting by iterating over the whole string to put the values into a dictionary to get there counts (n) and then using a priority queue which implements a heap under the hood that operates in (log n) time.
 
 
 ## Problem 4: Active Directory

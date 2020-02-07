@@ -59,7 +59,7 @@ class Node:
 
 def huffman_encoding(data):
     
-    print(f"Characters: {len(data)}")
+    print(f"Characters in string: {len(data)}\n")
     char_frequencies = {}
 
     for char in data:
@@ -105,6 +105,7 @@ def huffman_encoding(data):
 
     for c, cd in codes.items():
         print(f"Char({c}): {cd}")
+    print("")
 
     encoded_data = ""
     for char in data:
