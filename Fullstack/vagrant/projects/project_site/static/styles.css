@@ -1,0 +1,36 @@
+h1 {
+	font-family: "Helvetica Neue Light", Roboto, Helvetica, Arial, sans-serif;
+	font-size: 50px;
+	color: rgb(10, 14, 82);
+	line-height: 60px;
+	font-weight: 300;
+}
+
+h2 {
+	font-size: 24px;
+	color: rgb(228, 224, 21);
+	line-height: 29px;
+}
+
+h3 {
+	font-size: 18px;
+	color: #4A4A4A;
+    line-height: 23px;
+}
+
+.jumbotron {
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+}
+
+.top-menu {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.divider.blue {
+    background-color: navy;
+    border-top: 5px;
+	border-bottom: 5px
+}

@@ -1,0 +1,90 @@
+{% extends "layout1.html" %}
+{% block content %}
+
+<div class="row top-menu">
+		<div class="col-md-10">
+            <h1>{{ project.project }} Tasks</h1>
+        </div>
+		<div class="col-md-2 text-right">
+            <a href="{{url_for('fbdisconnect')}}">Log out<br></a>
+            <a href="{{url_for('projectTasksJSON', project_id=project.project_id)}}">Export to JSON</a>
+		</div>
+	</div>
+	<div class="row divider blue">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner main">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+		</div>
+	</div>	
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 padding-none">
+			
+		</div>
+		<div class="col-md-1"></div>
+    </div>
+
+    <div class="panel-group" id="accordion">
+    {% for task in tasks %}
+    <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}">{{ task.task }}</a>
+                        <a><b>Start Date:</b>{{ task.task_startDate }}</a>
+                        <a><b>End Date:</b>{{ task.task_endDate }}</a>
+                </h4>
+            </div>
+            <div id="collapse{{ loop.index }}" class="panel-collapse collapse">
+                    <div class="panel-body">{{ task.task_description }}</div>
+                    <div class="panel-footer">
+                            <form action="{{ url_for('deleteTask', task_id = task.task_id) }}" method="POST">
+                                <a href="javascript:;" onclick="parentNode.submit();">Delete Task</a>
+                                <input type="hidden" name="delete" value="delete">
+                            </form>
+                            <a href="{{ url_for('editTask', project_id = project.project_id, task_id = task.task_id) }}">Edit Task</a>
+                    </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="row divider blue">
+        <div class="col-md-12"></div>
+    </div>
+    <div class="container-fluid bg-grey">
+            <h2 class="text-center">Add New Task</h2>
+            <div class="row">
+                <div class="col-sm-5">
+                <p>Add a new task for <b>{{ project.project }}</b> here. Be sure to include a task description as well as start and end dates.</p>
+                </div>
+                <form action="#" method="POST">
+                <div class="col-sm-7">
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <input class="form-control" id="task" name="task" placeholder="Task" type="text" required>
+                    </div>              
+                </div>
+                <div class="row">
+                        <div class="col-sm-6">Start Date</div>
+                        <div class="col-sm-6">End Date</div>
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                    <input class="form-control" id="start_date" name="start_date" type="date" required>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                    <input class="form-control" id="end_date" name="end_date" type="date" required>
+                    </div>
+                </div>
+                <textarea class="form-control" id="task_description" name="task_description" placeholder="Task Description" rows="5"></textarea><br>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                    <button class="btn btn-default pull-right" type="submit">Add Task</button>
+                    </div>
+                </div> 
+                </div>
+            </div>
+            </form>
+            </div>
+        </div>
+    {% endblock %}

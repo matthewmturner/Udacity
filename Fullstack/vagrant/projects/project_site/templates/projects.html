@@ -1,0 +1,89 @@
+{% extends "layout1.html" %}
+{% block content %}
+
+	<div class="row top-menu">
+		<div class="col-md-10">
+            <h1>{{ session.username }}'s Projects</h1>
+        </div>
+		<div class="col-md-2 text-right">
+            <a href="{{url_for('fbdisconnect')}}">Log out<br></a>
+            <a href="{{url_for('projectsJSON')}}">Export to JSON</a>
+		</div>
+	</div>
+	<div class="row divider blue">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner main">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+		</div>
+	</div>	
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 padding-none">
+			
+		</div>
+		<div class="col-md-1"></div>
+    </div>
+    
+    <div class="panel-group" id="accordion">
+    {% for project in projects %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ loop.index }}">{{ project.project }}</a>
+                    <a href="{{ url_for('showProjectDetails', project_id = project.project_id)}}"><i><b>Task Details</b></i></a>
+            </h4>
+        </div>
+        <div id="collapse{{ loop.index }}" class="panel-collapse collapse">
+                <div class="panel-body">{{ project.project_description }}</div>
+                <div class="panel-footer">
+                    <form action="{{ url_for('deleteProject', project_id = project.project_id) }}" method="POST">
+                        <a href="javascript:;" onclick="parentNode.submit();">Delete Project</a>
+                        <input type="hidden" name="delete" value="delete">
+                    </form>
+                    <a href="{{ url_for('editProject', project_id = project.project_id) }}">Edit Project</a>
+                </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    <div class="row divider blue">
+        <div class="col-md-12"></div>
+    </div>
+    <div class="container-fluid bg-grey">
+            <h2 class="text-center">Create New Project</h2>
+            <div class="row">
+              <div class="col-sm-5">
+                <p>Create a new project here. Be sure to include a project description as well as start and end dates.  </p>
+              </div>
+              <form action="#" method="POST">
+              <div class="col-sm-7">
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <input class="form-control" id="name" name="name" placeholder="Project Name" type="text" required>
+                    </div>              
+                </div>
+                <div class="row">
+                        <div class="col-sm-6">Start Date</div>
+                        <div class="col-sm-6">End Date</div>
+                <div class="row">
+                  <div class="col-sm-6 form-group">
+                    <input class="form-control" id="start_date" name="start_date" type="date" required>
+                  </div>
+                  <div class="col-sm-6 form-group">
+                    <input class="form-control" id="end_date" name="end_date" type="date" required>
+                  </div>
+                </div>
+                <textarea class="form-control" id="project_description" name="project_description" placeholder="Project Description" rows="5"></textarea><br>
+                <div class="row">
+                  <div class="col-sm-12 form-group">
+                    <button class="btn btn-default pull-right" type="submit">Create Project</button>
+                  </div>
+                </div> 
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
+{% endblock %}
