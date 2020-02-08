@@ -27,7 +27,7 @@ Because this uses a recursive function for each leaf node the call stack can gro
 
 ## Problem 4: Active Directory
 
-In order to solve this I treated the problem similar to Problem 2 on File Recursion.  I wanted to traverse the parent(group), child(sub-group), attribute(user) relationships.  So in order to implement this I used a recursive solution again which results in O(n) complexity where n is the number of users in the group.
+In order to solve this I treated the problem similar to Problem 2 on File Recursion.  I wanted to traverse the parent(group), child(sub-group), attribute(user) relationships.  So in order to implement this I used a recursive solution again which results in O(n) complexity where n is the number of users in the group.  Similarly the space complexity is O(n) for the same reasons.
 
 Because this uses a recursive function the call stack can grow to m where m is the number of groups in all groups and subgroups of the parent group.
 
