@@ -9,16 +9,24 @@ class Node:
 class LRU_Cache:
 
     def __init__(self, capacity):
-        # Initialize class variables
+        """Initialize LRU (least recently used) cache object.
+        
+        Arguments:
+            capacity {int} -- The max number of objects to hold in cache. 
+        """
         self.cache = dict()
-        self.cache_mapper = dict()
         self.cache_capacity = capacity
         self.cache_size = 0 
         self.cache_tracker_head = None # LinkedList head
         self.cache_tracker_tail = None # LinkedList tail
 
     def set(self, key, value):
-        # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item. 
+        """Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item. 
+        
+        Arguments:
+            key {hashable type} -- key used to identify item in cache
+            value {any object} -- value to be held in cache associate to key
+        """
         if self.cache_size == 0:
             new_node = Node(value)
             self.cache[key] = new_node
@@ -40,7 +48,14 @@ class LRU_Cache:
             self.cache_size += 1
 
     def get(self, key):
-        # Retrieve item from provided key. Return -1 if nonexistent.
+        """ Retrieve item from provided key. Return -1 if nonexistent.
+        
+        Arguments:
+            key {hashable type} -- key to identify item in cache
+        
+        Returns:
+            [any object] -- value associated to key
+        """
 
         if self.cache.get(key) is None:
             return -1
@@ -94,30 +109,20 @@ class LRU_Cache:
 our_cache = LRU_Cache(5)
 
 our_cache.set(1, 1)
-print(f"Current head: {our_cache.cache_tracker_head.value}")
-print(f"Current tail: {our_cache.cache_tracker_tail.value}")
 our_cache.set(2, 2)
-print(f"Current head: {our_cache.cache_tracker_head.value}")
-print(f"Current tail: {our_cache.cache_tracker_tail.value}")
 our_cache.set(3, 3)
-print(f"Current head: {our_cache.cache_tracker_head.value}")
-print(f"Current tail: {our_cache.cache_tracker_tail.value}")
 our_cache.set(4, 4)
+our_cache.set(5, 5)
 
-print(our_cache.get(1))       # returns 1
-print(our_cache.get(2))       # returns 2
-print(our_cache.get(9))      # returns -1 because 9 is not present in the cache
-
-our_cache.set(5, 5) 
+print(our_cache.get(1))
+# Expected output: 1
+print(our_cache.get(9))
+# Expected output: -1 because 9 is not present in the cache
 our_cache.set(6, 6)
-
-print(our_cache.get(3))
 print(our_cache)
-
-our_cache.set(7, 7)
-our_cache.set(8, 8)
-our_cache.get(2)
-
-our_cache.set(10, 10)
-print(our_cache)
-print(len(our_cache))
+# Expected output:
+# {1,1,
+# 3:3,
+# 4:4,
+# 5:5,
+# 6:6}
