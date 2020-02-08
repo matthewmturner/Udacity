@@ -54,7 +54,7 @@ def huffman_encoding(data):
 
     print(f"Characters in string: {len(data)}\n")
     if len(data) == 0:
-        return "0", None, None 
+        return "0", None, None
 
     char_frequencies = {}
 
