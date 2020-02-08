@@ -1,9 +1,8 @@
 import sys
-from collections import deque, namedtuple
 from queue import PriorityQueue
 
+
 class Node:
-        
     def __init__(self):
         self.char = None
         self.freq = None
@@ -13,13 +12,13 @@ class Node:
 
     def set_left(self, left):
         self.left = left
-        
+
     def set_right(self, right):
         self.right = right
-        
+
     def get_left(self):
         return self.left
-    
+
     def get_right(self):
         return self.right
 
@@ -42,8 +41,17 @@ class Node:
     def __lt__(self, other):
         return self.get_freq() < other.get_freq()
 
+
 def huffman_encoding(data):
+    """Takes a string and compresses it using a huffman encoding approach.  
     
+    Arguments:
+        data {str} -- String to be encoded
+    
+    Returns:
+        [str, Node, dict] -- Encoded string, accompanying tree to decode, and codes for each letter
+    """
+
     print(f"Characters in string: {len(data)}\n")
     char_frequencies = {}
 
@@ -56,7 +64,7 @@ def huffman_encoding(data):
         node = Node()
         node.set_char_count(char, ct)
         pqueue.put((ct, node))
-    
+
     while pqueue.qsize() > 1:
         node_smaller = pqueue.get()[1]
         node_small = pqueue.get()[1]
@@ -79,9 +87,9 @@ def huffman_encoding(data):
                     codes[node.char] = code
                 traverse(node.get_left(), code, 0)
                 traverse(node.get_right(), code, 1)
-        
-        code = ""        
-        traverse(root.get_left(), code, 0)        
+
+        code = ""
+        traverse(root.get_left(), code, 0)
         traverse(root.get_right(), code, 1)
 
         return codes
@@ -98,38 +106,54 @@ def huffman_encoding(data):
 
     return encoded_data, root_node, codes
 
-def huffman_decoding(data,tree):
+
+def huffman_decoding(data, tree):
+    """Takes encoded data and the accompanying huffman tree to decode the data
+    
+    Arguments:
+        data {str} -- String of 1s and 0s representing encoded data
+        tree {Node} -- Root node to decode the data
+    
+    Returns:
+        [str] -- Decoded string that should match original encoded data
+    """
 
     node = tree
     decoded_string = ""
 
     for char in data:
-        if char == '0':
+        if char == "0":
             node = node.get_left()
-        elif char == '1':
+        elif char == "1":
             node = node.get_right()
 
         if node.char:
             decoded_string += node.char
-            node = tree    
+            node = tree
 
     return decoded_string
 
 
 if __name__ == "__main__":
-    codes = {}
 
+    
     a_great_sentence = "The bird is the word"
 
-    print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
-    print ("The content of the data is: {}\n".format(a_great_sentence))
+    print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
+    print("The content of the data is: {}\n".format(a_great_sentence))
 
     encoded_data, tree, codes = huffman_encoding(a_great_sentence)
 
-    print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
-    print ("The content of the encoded data is: {}\n".format(encoded_data))
+    print(
+        "The size of the encoded data is: {}\n".format(
+            sys.getsizeof(int(encoded_data, base=2))
+        )
+    )
+    print("The content of the encoded data is: {}\n".format(encoded_data))
 
     decoded_data = huffman_decoding(encoded_data, tree)
 
-    print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    print ("The content of the encoded data is: {}\n".format(decoded_data))
+    print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+    print("The content of the encoded data is: {}\n".format(decoded_data))
+
+    
