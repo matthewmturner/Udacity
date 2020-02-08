@@ -1,5 +1,4 @@
 class Node:
-    
     def __init__(self, value):
         self.value = value
         self.next = None
@@ -7,7 +6,6 @@ class Node:
 
 
 class LRU_Cache:
-
     def __init__(self, capacity):
         """Initialize LRU (least recently used) cache object.
         
@@ -16,9 +14,9 @@ class LRU_Cache:
         """
         self.cache = dict()
         self.cache_capacity = capacity
-        self.cache_size = 0 
-        self.cache_tracker_head = None # LinkedList head
-        self.cache_tracker_tail = None # LinkedList tail
+        self.cache_size = 0
+        self.cache_tracker_head = None  # LinkedList head
+        self.cache_tracker_tail = None  # LinkedList tail
 
     def set(self, key, value):
         """Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item. 
@@ -71,13 +69,13 @@ class LRU_Cache:
             return node.value
 
     def _add_head(self, node):
-        # Add new head by making new node next to old head and 
+        # Add new head by making new node next to old head and
         # old head previous to new node
         old_node = self.cache_tracker_head
         node.next = old_node
         old_node.previous = node
         self.cache_tracker_head = node
-    
+
     def _remove_tail(self):
         # Remove tail and return key to delete from cache
         lru_key = self.cache_tracker_tail.value
@@ -97,13 +95,12 @@ class LRU_Cache:
 
     def __repr__(self):
         s = "Cache:\n"
-        for k,v in self.cache.items():
+        for k, v in self.cache.items():
             s += f"Key({k}): {v.value}\n"
         return s
 
     def __len__(self):
         return self.cache_size
-
 
 
 our_cache = LRU_Cache(5)
