@@ -79,25 +79,25 @@ def huffman_encoding(data):
 
     root_node = pqueue.get()[1]
 
-    def pre_order(root):
+    def traverse(root):
 
         codes = {}
 
-        def traverse(node, code, val):
+        def recursive_traverse(node, code, val):
             code += str(val)
             if node:
                 if node.char:
                     codes[node.char] = code
-                traverse(node.get_left(), code, 0)
-                traverse(node.get_right(), code, 1)
+                recursive_traverse(node.get_left(), code, 0)
+                recursive_traverse(node.get_right(), code, 1)
 
         code = ""
-        traverse(root.get_left(), code, 0)
-        traverse(root.get_right(), code, 1)
+        recursive_traverse(root.get_left(), code, 0)
+        recursive_traverse(root.get_right(), code, 1)
 
         return codes
 
-    codes = pre_order(root_node)
+    codes = traverse(root_node)
 
     for c, cd in codes.items():
         print(f"Char({c}): {cd}")
