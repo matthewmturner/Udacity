@@ -21,21 +21,28 @@ class Group:
 
 
 def is_user_in_group(user, group):
-    """
-    Return True if user is in the group, False otherwise.
+    """Return True if user is in the group, False otherwise.
+    
+    Arguments:
+        user {str} -- User to lookup
+        group {Group} -- Active directory group to look in
 
-    Args:
-      user(str): user name/id
-      group(class:Group): group to check user membership against
+    Returns:
+        [boolean] -- True if user in group False otherwise
     """
-    
+
+    if not isinstance(user, str):
+        raise ValueError("Invalid user type. Must be string")
+    elif not isinstance(group, Group):
+        raise ValueError("Invalid group type. Must be Group object")
+
     def recursive_check_users(user, group):
-    
+
         for u in group.users:
             if user == u:
                 return True
-        
-        if group.groups != []: # Check for sub groups
+
+        if group.groups != []:  # Check for sub groups
             for g in group.groups:
                 return recursive_check_users(user, g)
         else:
@@ -44,14 +51,17 @@ def is_user_in_group(user, group):
     return recursive_check_users(user, group)
 
 
-parent = Group("parent")
-child = Group("child")
-sub_child = Group("subchild")
-
-sub_child_user = "sub_child_user"
-sub_child.add_user(sub_child_user)
-
-child.add_group(sub_child)
-parent.add_group(child)
-
-print(is_user_in_group("sub_child_user", parent))
+if __name__ == "__main__":
+    parent = Group("parent")
+    child = Group("child")
+    parent.add_group(child)
+    sub_child = Group("subchild")
+    child.add_group(sub_child)
+    sub_child_user = "sub_child_user"
+    sub_child.add_user(sub_child_user)
+    print(is_user_in_group("sub_child_user", parent))
+    # Expected output: True
+    print(is_user_in_group("Matt", parent))
+    # Expected output: False
+    print(is_user_in_group(None, parent))
+    # Expect output: ValueError for wrong user type

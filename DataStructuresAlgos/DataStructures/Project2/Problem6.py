@@ -19,7 +19,6 @@ class LinkedList:
             cur_head = cur_head.next
         return out_string
 
-
     def append(self, value):
 
         if self.head is None:
@@ -41,10 +40,22 @@ class LinkedList:
 
         return size
 
+
 def union(llist_1, llist_2):
+    """Take all unique elements from each linked list and add them to set.
     
+    Arguments:
+        llist_1 {LinkedList} -- LinkedList 1 containing data
+        llist_2 {LinkedList} -- LinkedList 2 containing data
+    
+    Returns:
+        [set] -- Set of all unique items from combined list
+    """
+    if (not isinstance(llist_1, LinkedList)) or (not isinstance(llist_2, LinkedList)):
+        raise ValueError("Inputs must be LinkedList objects")
+
     result = set()
-    
+
     node_1 = llist_1.head
     while node_1.next:
         result.add(node_1.value)
@@ -56,10 +67,22 @@ def union(llist_1, llist_2):
         node_2 = node_2.next
 
     return result
-    
+
 
 def intersection(llist_1, llist_2):
+    """Finds elements that are in both linked lists and returns them in a set. 
     
+    Arguments:
+        llist_1 {LinkedList} -- LinkedList 1 containing data
+        llist_2 {LinkedList} -- LinkedList 2 containing data
+
+    Returns:
+        [set] -- Set of items that were in each LinkedList
+    """
+
+    if (not isinstance(llist_1, LinkedList)) or (not isinstance(llist_2, LinkedList)):
+        raise ValueError("Inputs must be LinkedList objects")
+
     keys = set()
     result = set()
 
@@ -77,36 +100,42 @@ def intersection(llist_1, llist_2):
     return result
 
 
-# Test case 1
+if __name__ == "__main__":
+    # Test case 1
+    linked_list_1 = LinkedList()
+    linked_list_2 = LinkedList()
+    element_1 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 21]
+    element_2 = [6, 32, 4, 9, 6, 1, 11, 21, 1]
 
-linked_list_1 = LinkedList()
-linked_list_2 = LinkedList()
+    for i in element_1:
+        linked_list_1.append(i)
 
-element_1 = [3,2,4,35,6,65,6,4,3,21]
-element_2 = [6,32,4,9,6,1,11,21,1]
+    for i in element_2:
+        linked_list_2.append(i)
 
-for i in element_1:
-    linked_list_1.append(i)
+    print(union(linked_list_1, linked_list_2))
+    # Expected output: {32, 65, 2, 35, 3, 4, 6, 1, 9, 11, 21}
+    print(intersection(linked_list_1, linked_list_2))
+    # Expected output: {4, 6}
 
-for i in element_2:
-    linked_list_2.append(i)
+    # Test case 2
+    linked_list_3 = LinkedList()
+    linked_list_4 = LinkedList()
+    element_1 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 23]
+    element_2 = [1, 7, 8, 9, 11, 21, 1]
 
-print (union(linked_list_1,linked_list_2))
-print (intersection(linked_list_1,linked_list_2))
+    for i in element_1:
+        linked_list_3.append(i)
 
-# Test case 2
+    for i in element_2:
+        linked_list_4.append(i)
 
-linked_list_3 = LinkedList()
-linked_list_4 = LinkedList()
+    print(union(linked_list_3, linked_list_4))
+    # Expected output: {65, 2, 35, 3, 4, 6, 1, 7, 8, 9, 11, 21}
+    print(intersection(linked_list_3, linked_list_4))
+    # Expected output: Empty set
 
-element_1 = [3,2,4,35,6,65,6,4,3,23]
-element_2 = [1,7,8,9,11,21,1]
+    # Test case 3
+    print(union(5,6))
+    # Expected output: ValueError for wrong input types
 
-for i in element_1:
-    linked_list_3.append(i)
-
-for i in element_2:
-    linked_list_4.append(i)
-
-print (union(linked_list_3,linked_list_4))
-print (intersection(linked_list_3,linked_list_4))
