@@ -25,7 +25,13 @@ class LRU_Cache:
             key {hashable type} -- key used to identify item in cache
             value {any object} -- value to be held in cache associate to key
         """
-        if self.cache_size == 0:
+        if self.cache_capacity <= 0:
+            pass
+        elif self.cache.get(key) is not None:
+            new_node = Node(value)
+            self.cache[key] = new_node
+            self._add_head(new_node)
+        elif self.cache_size == 0:
             new_node = Node(value)
             self.cache[key] = new_node
             self.cache_tracker_head = new_node
@@ -123,3 +129,16 @@ print(our_cache)
 # 4:4,
 # 5:5,
 # 6:6}
+our_cache.set(3, 10)
+print(our_cache)
+# Expected output:
+# {1,1,
+# 3:3,
+# 4:4,
+# 5:5,
+# 6:6}
+neg_cache = LRU_Cache(-5)
+print(neg_cache.set(1,1))
+# Expected output: None
+print(neg_cache.get(1))
+# Expected output: None

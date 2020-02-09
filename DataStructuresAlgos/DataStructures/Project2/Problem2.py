@@ -2,19 +2,6 @@ import os
 
 
 def find_files(suffix, path):
-    """Main function to search diretory recursively for files with certain path suffix.
-    
-    Arguments:
-        suffix {str} -- File type
-        path {str} -- Path to start looking for files
-    
-    Returns:
-        [list] -- List of all files with provided suffix
-    """
-    return recursive_find_files(suffix, path)
-
-
-def recursive_find_files(suffix, path):
     """
     Find all files beneath path with file name suffix.
 
@@ -31,6 +18,9 @@ def recursive_find_files(suffix, path):
        a list of paths
     """
 
+    if os.path.isfile(path) and path.endswith(suffix):
+        return path
+
     files = []
 
     for item in os.listdir(path):
@@ -38,7 +28,7 @@ def recursive_find_files(suffix, path):
         if os.path.isfile(full_path) and item.endswith(suffix):
             files.append(full_path)
         elif os.path.isdir(full_path):
-            results = recursive_find_files(suffix, full_path)
+            results = find_files(suffix, full_path)
             files += results
 
     return files
