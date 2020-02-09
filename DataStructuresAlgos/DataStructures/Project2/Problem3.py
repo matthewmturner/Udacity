@@ -68,16 +68,21 @@ def huffman_encoding(data):
         node.set_char_count(char, ct)
         pqueue.put((ct, node))
 
-    while pqueue.qsize() > 1:
-        node_smaller = pqueue.get()[1]
-        node_small = pqueue.get()[1]
-        node = Node()
-        node.set_left(node_small)
-        node.set_right(node_smaller)
-        node.set_freq()
-        pqueue.put((node.get_freq(), node))
+    if pqueue.qsize() == 1:
+        root_node = Node()
+        leaf_node = pqueue.get()[1]
+        root_node.set_left(leaf_node)
+    else:
+        while pqueue.qsize() > 1:
+            node_smaller = pqueue.get()[1]
+            node_small = pqueue.get()[1]
+            node = Node()
+            node.set_left(node_small)
+            node.set_right(node_smaller)
+            node.set_freq()
+            pqueue.put((node.get_freq(), node))
 
-    root_node = pqueue.get()[1]
+        root_node = pqueue.get()[1]
 
     def traverse(root):
 
@@ -190,3 +195,18 @@ if __name__ == "__main__":
     print("Size of decoded data: {}".format(sys.getsizeof(decoded_data)))
     print("Content of encoded data: {}\n".format(decoded_data))
 
+    ##### Test 4 #####
+    blank_great_sentence = "AAAAA"
+
+    print("Size of data: {}".format(sys.getsizeof(blank_great_sentence)))
+    print("Content of data: {}".format(blank_great_sentence))
+
+    encoded_data, tree, codes = huffman_encoding(blank_great_sentence)
+
+    print("Size of encoded data: {}".format(sys.getsizeof(int(encoded_data, base=2))))
+    print("Content of encoded data: {}".format(encoded_data))
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+
+    print("Size of decoded data: {}".format(sys.getsizeof(decoded_data)))
+    print("Content of encoded data: {}\n".format(decoded_data))
