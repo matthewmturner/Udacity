@@ -38,9 +38,8 @@ def is_user_in_group(user, group):
 
     def recursive_check_users(user, group):
 
-        for u in group.users:
-            if user == u:
-                return True
+        if user in group.users:
+            return True
 
         if group.groups != []:  # Check for sub groups
             for g in group.groups:

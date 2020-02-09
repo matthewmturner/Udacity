@@ -42,7 +42,7 @@ My approach for this was to have to distinct classes to create the blockchain.
 
 The time complexity mainly comes from the calculation of the hash.  A LinkedList type structure was used (but calling the nodes Blocks instead) which allows for O(1) operation time separate from the computation of the hash.
 
-The space complexity primarily comes from the amount of data to be stored in the block, so O(n) where n is the size of the data.  There is a fixed size amount from the date stamp and the hash but these are constants and drop out from big O notation.  The data size will drive most of the Blocks size.
+The space complexity primarily comes from the amount of data to be stored in the block, so O(n) where n is the size of the data.  There is a fixed size amount from the date stamp and the hash but these are constants and drop out from big O notation.  The data size will drive most of the Blocks size.  Finally, the space complexity of the entire implementation is equal to O(n) where n is the number of blocks in the Blockchain.
 
 ## Problem 6: Union and Intersection
 

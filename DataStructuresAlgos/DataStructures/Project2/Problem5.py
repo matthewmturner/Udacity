@@ -71,7 +71,7 @@ class Blockchain:
 
     def __str__(self):
         if self.head is None:
-            print("Blockchain has no blocks")
+            return "Blockchain has no blocks"
         else:
             block = self.head
             n = 1
@@ -88,8 +88,7 @@ class Blockchain:
 
 if __name__ == "__main__":
     Blockchain = Blockchain()
-    print("Blockchain has no blocks")
-    # Expected output: 
+    # Expected output: Blockchain has no blocks 
     Blockchain.add_block("Hello")
     Blockchain.add_block("Goodbye")
     Blockchain.add_block("")

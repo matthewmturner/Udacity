@@ -133,7 +133,7 @@ our_cache.set(3, 10)
 print(our_cache)
 # Expected output:
 # {1,1,
-# 3:3,
+# 3:10,
 # 4:4,
 # 5:5,
 # 6:6}
