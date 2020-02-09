@@ -13,7 +13,9 @@ The space required for this is primarily composed of the dictionary used as the 
 
 ## Problem 2: File Recursion
 
-The time complexity for this is O(n) where n represents the number of files in a directory and all of its sub directories.
+I chose a recursive solution to this because each directory could be viewed as it's own subproblem and so all that was needed was figuring out the generalized solution which then simply needed to be applied recursively to the entire directory.
+
+The time complexity for this is O(n) where n represents the number of files in a directory and all of its sub directories and because they all need to be searched the complexity is n.  
 
 The space complexity for this is O(n) where n is the number of objects (files or directories) in the parent directory.  The call stack will grow each time there is an additional directory within a directory, so it can grow to m where m is the number of directories to be search.
 
@@ -29,7 +31,7 @@ Because this uses a recursive function for each leaf node the call stack can gro
 
 In order to solve this I treated the problem similar to Problem 2 on File Recursion.  I wanted to traverse the parent(group), child(sub-group), attribute(user) relationships.  So in order to implement this I used a recursive solution again which results in O(n) complexity where n is the number of users in the group.  Similarly the space complexity is O(n) for the same reasons.
 
-Because this uses a recursive function the call stack can grow to m where m is the number of groups in all groups and subgroups of the parent group.
+For the space complexity there is the sizes of the groups and users that will be present at each directory call.  Additionally, because this uses a recursive function the call stack can grow to m where m is the number of groups in all groups and subgroups of the parent group.
 
 ## Problem 5: Blockchain
 
@@ -40,7 +42,7 @@ My approach for this was to have to distinct classes to create the blockchain.
 
 The time complexity mainly comes from the calculation of the hash.  A LinkedList type structure was used (but calling the nodes Blocks instead) which allows for O(1) operation time separate from the computation of the hash.
 
-The space complexity primarily comes from the amount of data to be stored in the block.  There is a fixed size amount from the date stamp and the hash but the data size will drive most of the Blocks size.
+The space complexity primarily comes from the amount of data to be stored in the block, so O(n) where n is the size of the data.  There is a fixed size amount from the date stamp and the hash but these are constants and drop out from big O notation.  The data size will drive most of the Blocks size.
 
 ## Problem 6: Union and Intersection
 
