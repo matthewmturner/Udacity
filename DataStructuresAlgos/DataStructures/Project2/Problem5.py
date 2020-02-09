@@ -70,24 +70,29 @@ class Blockchain:
             raise ValueError("Block hash not found in blockchain")
 
     def __str__(self):
+        if self.head is None:
+            print("Blockchain has no blocks")
+        else:
+            block = self.head
+            n = 1
 
-        block = self.head
-        n = 1
+            s = "<=== Beginning of blockchain ===>\n"
+            while block:
+                s += f"Block {n} hash({block.hash}): {block.data}\n"
+                block = block.next_block
+                n += 1
+            s += "<====== End of blockchain ======>"
 
-        s = "<=== Beginning of blockchain ===>\n"
-        while block:
-            s += f"Block {n} hash({block.hash}): {block.data}\n"
-            block = block.next_block
-            n += 1
-        s += "<====== End of blockchain ======>"
-
-        return s
+            return s
 
 
 if __name__ == "__main__":
     Blockchain = Blockchain()
+    print("Blockchain has no blocks")
+    # Expected output: 
     Blockchain.add_block("Hello")
     Blockchain.add_block("Goodbye")
+    Blockchain.add_block("")
     print(Blockchain.length)
     # Expected output: 2
     print(Blockchain.head.data)

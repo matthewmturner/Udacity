@@ -57,12 +57,12 @@ def union(llist_1, llist_2):
     result = set()
 
     node_1 = llist_1.head
-    while node_1.next:
+    while node_1:
         result.add(node_1.value)
         node_1 = node_1.next
 
     node_2 = llist_2.head
-    while node_2.next:
+    while node_2:
         result.add(node_2.value)
         node_2 = node_2.next
 
@@ -87,12 +87,12 @@ def intersection(llist_1, llist_2):
     result = set()
 
     node_1 = llist_1.head
-    while node_1.next:
+    while node_1:
         keys.add(node_1.value)
         node_1 = node_1.next
 
     node_2 = llist_2.head
-    while node_2.next:
+    while node_2:
         if node_2.value in keys:
             result.add(node_2.value)
         node_2 = node_2.next
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     print(union(linked_list_1, linked_list_2))
     # Expected output: {32, 65, 2, 35, 3, 4, 6, 1, 9, 11, 21}
     print(intersection(linked_list_1, linked_list_2))
-    # Expected output: {4, 6}
+    # Expected output: {4, 21, 6}
 
     # Test case 2
     linked_list_3 = LinkedList()
@@ -131,7 +131,7 @@ if __name__ == "__main__":
         linked_list_4.append(i)
 
     print(union(linked_list_3, linked_list_4))
-    # Expected output: {65, 2, 35, 3, 4, 6, 1, 7, 8, 9, 11, 21}
+    # Expected output: {65, 2, 35, 3, 4, 6, 1, 7, 8, 9, 11, 21, 23}
     print(intersection(linked_list_3, linked_list_4))
     # Expected output: Empty set
 
