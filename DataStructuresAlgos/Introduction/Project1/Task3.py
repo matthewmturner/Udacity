@@ -4,11 +4,11 @@ It's ok if you don't understand how to read files.
 """
 import csv
 
-with open('texts.csv', 'r') as f:
+with open("texts.csv", "r") as f:
     reader = csv.reader(f)
     texts = list(reader)
 
-with open('calls.csv', 'r') as f:
+with open("calls.csv", "r") as f:
     reader = csv.reader(f)
     calls = list(reader)
 
@@ -49,25 +49,29 @@ call_count = 0
 bang_land_call_count = 0
 
 for call in calls:
-	if call[0][:5] == '(080)':
-		call_count += 1
-		if (' ' in call[1]) and (call[1][0] in ['7','8','9']):
-			mobile_area_code = call[1][:4]
-			bangalore_call_dests.add(mobile_area_code)
-		elif ')' in call[1]:
-			area_code_end = call[1].find(')')
-			land_area_code = call[1][:area_code_end + 1]
-			# call_count += 1
-			if land_area_code == '(080)':
-				bang_land_call_count += 1
-			bangalore_call_dests.add(land_area_code)
-		else:
-			# call_count += 1
-			bangalore_call_dests.add('140')
+    if call[0][:5] == "(080)":
+        call_count += 1
+        if (" " in call[1]) and (call[1][0] in ["7", "8", "9"]):
+            mobile_area_code = call[1][:4]
+            bangalore_call_dests.add(mobile_area_code)
+        elif ")" in call[1]:
+            area_code_end = call[1].find(")")
+            land_area_code = call[1][: area_code_end + 1]
+            # call_count += 1
+            if land_area_code == "(080)":
+                bang_land_call_count += 1
+            bangalore_call_dests.add(land_area_code)
+        else:
+            # call_count += 1
+            bangalore_call_dests.add("140")
 
 print("The numbers called by people in Bangalore have codes:")
 for code in sorted(bangalore_call_dests):
-	print(code)
+    print(code)
 
 bang_call_percent = bang_land_call_count / call_count
-print("{:.2f} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(bang_call_percent*100))
+print(
+    "{:.2f} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(
+        bang_call_percent * 100
+    )
+)

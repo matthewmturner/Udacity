@@ -4,11 +4,11 @@ It's ok if you don't understand how to read files.
 """
 import csv
 
-with open('texts.csv', 'r') as f:
+with open("texts.csv", "r") as f:
     reader = csv.reader(f)
     texts = list(reader)
 
-with open('calls.csv', 'r') as f:
+with open("calls.csv", "r") as f:
     reader = csv.reader(f)
     calls = list(reader)
 
@@ -41,11 +41,13 @@ for text in texts:
 possible_marketers = set()
 
 for num in outgoing_call_nums:
-    if (num not in receiving_call_nums) and (num not in outgoing_text_nums) and (num not in receiving_text_nums):
+    if (
+        (num not in receiving_call_nums)
+        and (num not in outgoing_text_nums)
+        and (num not in receiving_text_nums)
+    ):
         possible_marketers.add(num)
 
 print("These numbers could be telemarketers: ")
 for num in sorted(possible_marketers):
     print(num)
-
-
