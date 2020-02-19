@@ -8,6 +8,9 @@ def get_min_max(ints):
     current_max = None
     current_min = None
 
+    if (len(ints) == 0) or (ints is None):
+        return tuple([current_min, current_max])
+
     for i, n in enumerate(ints):
         if i == 0:
             current_max = n
@@ -28,3 +31,5 @@ l = [i for i in range(0, 10)]  # a list containing 0 - 9
 random.shuffle(l)
 
 print("Pass" if ((0, 9) == get_min_max(l)) else "Fail")
+print("Pass" if (0, 0) == get_min_max([0]) else "Fail")
+print("Pass" if (None, None) == get_min_max([]) else "Fail")
