@@ -1,4 +1,4 @@
-# Project 2 Algorith Efficiency Analysis
+# Project 2 Algorithm Efficiency Analysis
 
 ## Problem 1: Least Recently Used Cache
 
