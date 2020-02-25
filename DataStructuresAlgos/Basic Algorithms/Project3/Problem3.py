@@ -7,7 +7,12 @@ def rearrange_digits(input_list):
     Returns:
        (int),(int): Two maximum sums
     """
-    pass
+    num_str_1 = ""
+    # num_str_2 = ""
+    for n in input_list[::-1]:
+        num_str_1 += str(n)
+
+    return "Placeholder"
 
 
 def test_function(test_case):
@@ -17,3 +22,7 @@ def test_function(test_case):
         print("Pass")
     else:
         print("Fail")
+
+
+test_function([[1, 2, 3, 4, 5], [542, 31]])
+test_case = [[4, 6, 2, 5, 9, 8], [964, 852]]
