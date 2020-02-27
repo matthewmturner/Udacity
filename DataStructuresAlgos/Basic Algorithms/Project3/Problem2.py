@@ -24,25 +24,35 @@ def rotated_array_search(input_list, number):
     Returns:
        int: Index or -1
     """
-    start_index = 0
-    end_index = len(input_list) - 1
 
-    while start_index <= end_index:
-        mid_index = (start_index + end_index) // 2
+    def recursive_rotated_array_search(array, target, start_idx, end_idx):
 
-        mid_element = input_list[mid_index]
+        if start_idx > end_idx:
+            return -1
 
-        if number == mid_element:  # we have found the element
+        start_element = array[start_idx]
+        end_element = array[end_idx]
+
+        mid_index = (start_idx + end_idx) // 2
+        mid_element = array[mid_index]
+
+        if mid_element == target:
             return mid_index
+        elif ((target < mid_element) & (target >= start_element)) | (
+            (target > mid_element) & (start_element > end_element)
+        ):
+            return recursive_rotated_array_search(
+                array, target, start_idx, mid_index - 1
+            )
+        else:
+            return recursive_rotated_array_search(array, target, mid_index + 1, end_idx)
 
-        elif number < mid_element:
-            end_index = mid_index - 1
+    start = 0
+    end = len(input_list) - 1
 
-        else:  # the target is greater than mid element
-            # start_index = mid_element + 1
-            start_index = mid_index + 1
+    number_idx = recursive_rotated_array_search(input_list, number, start, end)
 
-    return -1
+    return number_idx
 
 
 def linear_search(input_list, number):
@@ -66,3 +76,5 @@ test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 8])
 test_function([[6, 7, 8, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 10])
+test_function([[4], 4])
+test_function([[], 4])
