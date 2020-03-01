@@ -13,10 +13,12 @@ class TrieNode:
         def recursive_suffixes(node, suffix=""):
             if node.is_word:
                 sufs.append(suffix)
+                return
             word = suffix
             for char, node in node.children.items():
                 word += char
                 recursive_suffixes(node, word)
+                word = word[:-1]
 
         for char, node in self.children.items():
             recursive_suffixes(node, suffix=char)
@@ -97,6 +99,5 @@ wordList = [
 for word in wordList:
     MyTrie.insert(word)
 
-word = MyTrie.find("f")
-print(word.children)
+word = MyTrie.find("t")
 print(word.suffixes())
