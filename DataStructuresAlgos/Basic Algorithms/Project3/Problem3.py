@@ -1,3 +1,38 @@
+def sort_a_little_bit(items, begin_index, end_index):
+    left_index = begin_index
+    pivot_index = end_index
+    pivot_value = items[pivot_index]
+
+    while pivot_index != left_index:
+
+        item = items[left_index]
+
+        if item <= pivot_value:
+            left_index += 1
+            continue
+
+        items[left_index] = items[pivot_index - 1]
+        items[pivot_index - 1] = pivot_value
+        items[pivot_index] = item
+        pivot_index -= 1
+
+    return pivot_index
+
+
+def sort_all(items, begin_index, end_index):
+    if end_index <= begin_index:
+        return
+
+    pivot_index = sort_a_little_bit(items, begin_index, end_index)
+    sort_all(items, begin_index, pivot_index - 1)
+    sort_all(items, pivot_index + 1, end_index)
+
+
+def quicksort(items):
+    sorted_items = sort_all(items, 0, len(items) - 1)
+    return sorted_items
+
+
 def rearrange_digits(input_list):
     """
     Rearrange Array Elements so as to form two number such that their sum is maximum.
@@ -7,12 +42,15 @@ def rearrange_digits(input_list):
     Returns:
        (int),(int): Two maximum sums
     """
-    num_str_1 = ""
-    # num_str_2 = ""
-    for n in input_list[::-1]:
-        num_str_1 += str(n)
+    quicksort(input_list)
 
-    return "Placeholder"
+    list_1 = [str(d) for d in input_list[::-1] if d % 2 == 0]
+    list_2 = [str(d) for d in input_list[::-1] if d % 2 == 1]
+
+    output_1 = int("".join(list_1))
+    output_2 = int("".join(list_2))
+
+    return output_1, output_2
 
 
 def test_function(test_case):
