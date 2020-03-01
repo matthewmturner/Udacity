@@ -42,15 +42,24 @@ def rearrange_digits(input_list):
     Returns:
        (int),(int): Two maximum sums
     """
-    quicksort(input_list)
+    length = len(input_list)
+    if length == 0:
+        return None
+    elif length == 1:
+        return input_list
+    else:
+        quicksort(input_list)
 
-    list_1 = [str(d) for d in input_list[::-1] if d % 2 == 0]
-    list_2 = [str(d) for d in input_list[::-1] if d % 2 == 1]
+        list_1 = [str(d) for d in input_list[::-2]]
+        list_2 = [str(d) for d in input_list[-2::-2]]
 
-    output_1 = int("".join(list_1))
-    output_2 = int("".join(list_2))
+        print(f"List 1: {list_1}")
+        print(f"List 2: {list_2}")
 
-    return output_1, output_2
+        output_1 = int("".join(list_1))
+        output_2 = int("".join(list_2))
+
+        return output_1, output_2
 
 
 def test_function(test_case):
@@ -63,4 +72,6 @@ def test_function(test_case):
 
 
 test_function([[1, 2, 3, 4, 5], [542, 31]])
-test_case = [[4, 6, 2, 5, 9, 8], [964, 852]]
+test_function([[4, 6, 2, 5, 9, 8], [964, 852]])
+test_function([[1, 2], [2, 1]])
+test_function([[], []])
