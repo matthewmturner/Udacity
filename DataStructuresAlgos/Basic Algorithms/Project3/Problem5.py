@@ -79,6 +79,9 @@ for word in wordList:
 t = MyTrie.find("t")
 print(t.suffixes())
 # Expected output: ['rie', 'rigger', 'rigonometry', 'ripod']
+t = MyTrie.find("trig")
+print(t.suffixes())
+# Expected output: ['ger', 'onometry']
 f = MyTrie.find("f")
 print(f.suffixes())
 # Expected output: ['un', 'unction', 'actory']
