@@ -21,7 +21,7 @@ def sqrt(number):
     """
     if not isinstance(number, int):
         raise ValueError("Input must be an integer")
-    nums = range(0, number + 1)
+    nums = range(0, number // 2)
     fl_sq_root = 0
     for n in nums:
         if number >= n ** 2:
