@@ -11,9 +11,11 @@ class TrieNode:
         sufs = []
 
         def recursive_suffixes(node, suffix=""):
-            if node.is_word:
+            if (node.is_word) and (node.children is None):
                 sufs.append(suffix)
                 return
+            elif (node.is_word) and (node.children is not None):
+                sufs.append(suffix)
             word = suffix
             for char, node in node.children.items():
                 word += char
@@ -57,31 +59,6 @@ class Trie:
         return string.is_word
 
 
-word_list = [
-    "apple",
-    "bear",
-    "goo",
-    "good",
-    "goodbye",
-    "goods",
-    "goodwill",
-    "gooses",
-    "zebra",
-]
-word_trie = Trie()
-
-# Add words
-for word in word_list:
-    word_trie.insert(word)
-
-# Test words
-test_words = ["bear", "goo", "good", "goos"]
-for word in test_words:
-    if word_trie.exists(word):
-        print('"{}" is a word.'.format(word))
-    else:
-        print('"{}" is not a word.'.format(word))
-
 MyTrie = Trie()
 wordList = [
     "ant",
@@ -99,5 +76,17 @@ wordList = [
 for word in wordList:
     MyTrie.insert(word)
 
-word = MyTrie.find("t")
-print(word.suffixes())
+t = MyTrie.find("t")
+print(t.suffixes())
+# Expected output: ['rie', 'rigger', 'rigonometry', 'ripod']
+f = MyTrie.find("f")
+print(f.suffixes())
+# Expected output: ['un', 'unction', 'actory']
+a = MyTrie.find("a")
+print(a.suffixes())
+# Expected output: ['nt', 'nthology', 'ntagonist', 'ntonym']
+z = MyTrie.find("z")
+print(z)
+# Expected result: False
+print(z.suffixes())
+# Expevted result: AttributeError bool object has no attribute suffixes
