@@ -1,0 +1,3 @@
+# Problem 3 Efficiency Analysis
+
+The approach to this problem was simple, I kept two variables to track the current min and max values and i iterated through the list comparing each value to those and if it's greater or less than the respective min and max then I updated the value.  The time and space complexity for this was O(n) as it only required one pass through the list and keeping only the list plus a couple constant variables in memory was needed which scales linearly with the size of the input list.
