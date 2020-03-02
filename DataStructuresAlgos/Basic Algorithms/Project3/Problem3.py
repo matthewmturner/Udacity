@@ -44,8 +44,9 @@ def rearrange_digits(input_list):
     """
     length = len(input_list)
     if length == 0:
-        return None
+        raise ValueError("Input must be a list and have at least 1 item")
     elif length == 1:
+        print(f"Only one input, sum: {input_list[0]}")
         return input_list
     else:
         quicksort(input_list)
@@ -53,11 +54,12 @@ def rearrange_digits(input_list):
         list_1 = [str(d) for d in input_list[::-2]]
         list_2 = [str(d) for d in input_list[-2::-2]]
 
-        print(f"List 1: {list_1}")
-        print(f"List 2: {list_2}")
-
         output_1 = int("".join(list_1))
         output_2 = int("".join(list_2))
+
+        print(f"List 1: {output_1}")
+        print(f"List 2: {output_2}")
+        print(f"Sum: {output_1 + output_2}")
 
         return output_1, output_2
 
@@ -72,6 +74,14 @@ def test_function(test_case):
 
 
 test_function([[1, 2, 3, 4, 5], [542, 31]])
+# Expected output: Printed sum should be 573
 test_function([[4, 6, 2, 5, 9, 8], [964, 852]])
+# Expected output: Printed sum should be 1816
+test_function([[1, 1, 1, 1, 1], [111, 11]])
+# Expected output: Printed sum should be 122
 test_function([[1, 2], [2, 1]])
+# Expected output: Printed sum should be 3
+test_function([[1], [1]])
+# Expected output: Only one input, sum should be 1
 test_function([[], []])
+# Expected output: ValueError.  Input must be a list and have at least 1 item

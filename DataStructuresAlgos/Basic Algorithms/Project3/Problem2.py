@@ -72,9 +72,16 @@ def test_function(test_case):
 
 
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 6])
+# Expected output: Pass
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
+# Expected output: Pass
 test_function([[6, 7, 8, 1, 2, 3, 4], 8])
+# Expected output: Pass
 test_function([[6, 7, 8, 1, 2, 3, 4], 1])
+# Expected output: Pass
 test_function([[6, 7, 8, 1, 2, 3, 4], 10])
+# Expected output: Pass
 test_function([[4], 4])
+# Expected output: Pass
 test_function([[], 4])
+# Expected output: Pass

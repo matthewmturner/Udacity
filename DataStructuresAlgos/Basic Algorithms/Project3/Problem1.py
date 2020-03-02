@@ -19,6 +19,8 @@ def sqrt(number):
     Returns:
        int: Floored Square Root
     """
+    if not isinstance(number, int):
+        raise ValueError("Input must be an integer")
     nums = range(0, number + 1)
     fl_sq_root = 0
     for n in nums:
@@ -31,7 +33,14 @@ def sqrt(number):
 
 
 print("Pass" if (3 == sqrt(9)) else "Fail")
+# Expected Output: Pass
 print("Pass" if (0 == sqrt(0)) else "Fail")
+# Expected Output: Pass
 print("Pass" if (4 == sqrt(16)) else "Fail")
+# Expected Output: Pass
 print("Pass" if (1 == sqrt(1)) else "Fail")
+# Expected Output: Pass
 print("Pass" if (5 == sqrt(27)) else "Fail")
+# Expected Output: Pass
+sqrt("10")
+# Expected output: ValueError: Input must be an integer
