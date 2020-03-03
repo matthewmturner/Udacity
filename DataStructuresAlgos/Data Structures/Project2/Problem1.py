@@ -8,9 +8,8 @@ class Node:
 class LRU_Cache:
     def __init__(self, capacity):
         """Initialize LRU (least recently used) cache object.
-        
         Arguments:
-            capacity {int} -- The max number of objects to hold in cache. 
+            capacity {int} -- The max number of objects to hold in cache.
         """
         self.cache = dict()
         self.cache_capacity = capacity
@@ -19,8 +18,7 @@ class LRU_Cache:
         self.cache_tracker_tail = None  # LinkedList tail
 
     def set(self, key, value):
-        """Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item. 
-        
+        """Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item.
         Arguments:
             key {hashable type} -- key used to identify item in cache
             value {any object} -- value to be held in cache associate to key
@@ -53,10 +51,8 @@ class LRU_Cache:
 
     def get(self, key):
         """ Retrieve item from provided key. Return -1 if nonexistent.
-        
         Arguments:
             key {hashable type} -- key to identify item in cache
-        
         Returns:
             [any object] -- value associated to key
         """
@@ -138,7 +134,7 @@ print(our_cache)
 # 5:5,
 # 6:6}
 neg_cache = LRU_Cache(-5)
-print(neg_cache.set(1,1))
+print(neg_cache.set(1, 1))
 # Expected output: None
 print(neg_cache.get(1))
 # Expected output: None

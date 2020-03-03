@@ -21,8 +21,7 @@ class Group:
 
 
 def is_user_in_group(user, group):
-    """Return True if user is in the group, False otherwise.
-    
+    """Return True if user is in the group, False otherwise
     Arguments:
         user {str} -- User to lookup
         group {Group} -- Active directory group to look in

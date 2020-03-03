@@ -88,7 +88,7 @@ class Blockchain:
 
 if __name__ == "__main__":
     Blockchain = Blockchain()
-    # Expected output: Blockchain has no blocks 
+    # Expected output: Blockchain has no blocks
     Blockchain.add_block("Hello")
     Blockchain.add_block("Goodbye")
     Blockchain.add_block("")

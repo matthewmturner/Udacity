@@ -43,11 +43,9 @@ class LinkedList:
 
 def union(llist_1, llist_2):
     """Take all unique elements from each linked list and add them to set.
-    
     Arguments:
         llist_1 {LinkedList} -- LinkedList 1 containing data
         llist_2 {LinkedList} -- LinkedList 2 containing data
-    
     Returns:
         [set] -- Set of all unique items from combined list
     """
@@ -70,12 +68,10 @@ def union(llist_1, llist_2):
 
 
 def intersection(llist_1, llist_2):
-    """Finds elements that are in both linked lists and returns them in a set. 
-    
+    """Finds elements that are in both linked lists and returns them in a set.
     Arguments:
         llist_1 {LinkedList} -- LinkedList 1 containing data
         llist_2 {LinkedList} -- LinkedList 2 containing data
-
     Returns:
         [set] -- Set of items that were in each LinkedList
     """
@@ -136,6 +132,5 @@ if __name__ == "__main__":
     # Expected output: Empty set
 
     # Test case 3
-    print(union(5,6))
+    print(union(5, 6))
     # Expected output: ValueError for wrong input types
-

@@ -43,11 +43,9 @@ class Node:
 
 
 def huffman_encoding(data):
-    """Takes a string and compresses it using a huffman encoding approach.  
-    
+    """Takes a string and compresses it using a huffman encoding approach.
     Arguments:
         data {str} -- String to be encoded
-    
     Returns:
         [str, Node, dict] -- Encoded string, accompanying tree to decode, and codes for each letter
     """
@@ -117,11 +115,9 @@ def huffman_encoding(data):
 
 def huffman_decoding(data, tree):
     """Takes encoded data and the accompanying huffman tree to decode the data
-    
     Arguments:
         data {str} -- String of 1s and 0s representing encoded data
         tree {Node} -- Root node to decode the data
-    
     Returns:
         [str] -- Decoded string that should match original encoded data
     """
