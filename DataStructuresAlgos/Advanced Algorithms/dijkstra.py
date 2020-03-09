@@ -84,28 +84,6 @@ graph.add_edge(node_y, node_i, 4)
 graph.add_edge(node_y, node_t, 5)
 
 
-# ## Implementation
-# Using what you've learned, implement Dijkstra's Algorithm to find the shortest distance from the "U" node to the "Y" node.
-
-# In[ ]:
-
-
-def dijkstra(start_node, end_node):
-    pass
-
-
-print(
-    "Shortest Distance from {} to {} is {}".format(
-        node_u.value, node_y.value, dijkstra(node_u, node_y)
-    )
-)
-
-
-# <span class="graffiti-highlight graffiti-id_6vmf0hp-id_cjtybve"><i></i><button>Hide Solution</button></span>
-
-# In[ ]:
-
-
 def dijkstra(start_node, end_node):
     distance_dict = {node: math.inf for node in graph.nodes}
     shortest_path_to_node = {}
@@ -125,3 +103,10 @@ def dijkstra(start_node, end_node):
                     distance_dict[edge.node] = new_node_distance
 
     return shortest_path_to_node[end_node]
+
+
+print(
+    "Shortest Distance from {} to {} is {}".format(
+        node_u.value, node_y.value, dijkstra(node_u, node_y)
+    )
+)
